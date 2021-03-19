@@ -28,14 +28,14 @@ class Ribbon extends StatelessWidget {
   final RibbonLocation location;
   final Widget child;
   const Ribbon(
-      {Key key,
-      @required this.nearLength,
-      @required this.farLength,
-      @required this.title,
+      {Key? key,
+      required this.nearLength,
+      required this.farLength,
+      required this.title,
       this.titleStyle = _kTextStyle,
       this.color = Colors.white,
       this.location = RibbonLocation.topStart,
-      this.child})
+      required this.child})
       : super(key: key);
 
   @override
@@ -54,32 +54,32 @@ class Ribbon extends StatelessWidget {
 }
 
 class _RibbonPainter extends CustomPainter {
-  double nearLength;
-  double farLength;
+  late double nearLength;
+  late double farLength;
   final String title;
-  final Color color;
-  final TextStyle titleStyle;
+  final Color? color;
+  final TextStyle? titleStyle;
   final RibbonLocation location;
   bool initialized = false;
-  TextPainter textPainter;
-  Paint paintRibbon;
-  Path pathRibbon;
-  double rotateRibbon;
-  Offset offsetRibbon;
-  Offset offsetTitle;
-  Paint paintShadow;
+  late TextPainter textPainter;
+  late Paint paintRibbon;
+  late Path pathRibbon;
+  late double rotateRibbon;
+  late Offset offsetRibbon;
+  late Offset offsetTitle;
+  late Paint paintShadow;
 
  static const BoxShadow _shadow = BoxShadow(
     color: Color(0x7F000000),
     blurRadius: 6.0,
   );
   _RibbonPainter(
-      {this.nearLength,
-      this.farLength,
-      this.title,
+      {required this.nearLength,
+      required this.farLength,
+      required this.title,
       this.titleStyle,
       this.color,
-      this.location});
+      required this.location});
   @override
   void paint(Canvas canvas, Size size) {
     if (!initialized) _initializ(size);
@@ -105,7 +105,7 @@ class _RibbonPainter extends CustomPainter {
 
   void _initializ(Size size) {
     initialized = true;
-    if (nearLength > farLength) {
+    if (nearLength! > farLength!) {
       double temp = farLength;
       farLength = nearLength;
       nearLength = temp;
@@ -119,7 +119,7 @@ class _RibbonPainter extends CustomPainter {
         textDirection: TextDirection.ltr);
     textPainter.layout();
     paintRibbon = Paint()
-      ..color = color
+      ..color = color!
       ..style = PaintingStyle.fill;
     offsetTitle = Offset(-textPainter.width / 2, -textPainter.height / 2);
     rotateRibbon = _rotation;
