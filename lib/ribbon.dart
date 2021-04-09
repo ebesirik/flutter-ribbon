@@ -105,7 +105,7 @@ class _RibbonPainter extends CustomPainter {
 
   void _initializ(Size size) {
     initialized = true;
-    if (nearLength! > farLength!) {
+    if (nearLength > farLength) {
       double temp = farLength;
       farLength = nearLength;
       nearLength = temp;
